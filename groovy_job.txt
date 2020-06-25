@@ -20,7 +20,7 @@ cp -rvf /root/.jenkins/workspace/website_code_pull/* .
 if ls | grep .html
 then 
 cd webcode 
-kubectl create -f htmlwebsite.yaml
+kubectl create -f html_deploy.yaml
 sleep 5
 cd .. 
 export html=$(ls | grep .html)
@@ -31,7 +31,7 @@ kubectl $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
 elif ls | grep .php
 then 
 cd webcode 
-kubectl create -f phpwebsite.yaml
+kubectl create -f php_deploy.yaml
 sleep 5
 cd .. 
 export php=$(ls | grep .php)
