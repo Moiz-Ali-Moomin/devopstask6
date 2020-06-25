@@ -16,10 +16,11 @@ description ("Launching website on the top of k8s")
     }
    steps {
         shell('''#!/bin/bash -xe
+cp -rvf /root/.jenkins/workspace/website_code_pull/* .
 if ls | grep .html
 then 
 cd webcode 
-kubectl create -f html_deploy.yaml
+kubectl create -f htmlwebsite.yaml
 sleep 5
 cd .. 
 export html=$(ls | grep .html)
@@ -30,7 +31,7 @@ kubectl $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
 elif ls | grep .php
 then 
 cd webcode 
-kubectl create -f php_deploy.yaml
+kubectl create -f phpwebsite.yaml
 sleep 5
 cd .. 
 export php=$(ls | grep .php)
@@ -50,7 +51,7 @@ description ("It will test if pod is running else send a mail")
     }
 steps {
         shell('''#!/bin/bash -xe
-cp -rvf /root/.jenkins/workspace/job1/* .
+cp -rvf /root/.jenkins/workspace/website_code_pull/* .
 export html=$(kubectl get deployment | grep htmlwebsite | awk '{print$1}')
 if [[ "$html" == "htmlwebsite" ]]
 then 
@@ -78,9 +79,9 @@ fi
 }
 
 
-buildPipelineView('Build-Task6') {
+buildPipelineView('BuildP-Task6') {
     title('Task6-build')
-    displayedBuilds(4)
+    displayedBuilds(3)
     selectedJob('website_code_pull')
     showPipelineParameters(true)
     refreshFrequency(2)
