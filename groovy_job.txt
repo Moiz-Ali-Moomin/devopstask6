@@ -1,7 +1,7 @@
 job("website_code_pull") {
 description ("Pulling website code")
   scm{
-    github('Moiz-Ali-Moomin/webcode','master')
+    github('Moiz-Ali-Moomin/websitecode','master')
   }
   triggers {
         githubPush()
