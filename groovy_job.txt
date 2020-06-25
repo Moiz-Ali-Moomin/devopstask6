@@ -19,7 +19,7 @@ description ("Launching website on the top of k8s")
 if ls | grep .html
 then 
 cd webcode 
-kubectl create -f htmlwebsite.yaml
+kubectl create -f html_deploy.yaml
 sleep 5
 cd .. 
 export html=$(ls | grep .html)
@@ -30,7 +30,7 @@ kubectl $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
 elif ls | grep .php
 then 
 cd webcode 
-kubectl create -f phpwebsite.yaml
+kubectl create -f php_deploy.yaml
 sleep 5
 cd .. 
 export php=$(ls | grep .php)
@@ -78,9 +78,9 @@ fi
 }
 
 
-buildPipelineView('BuildP-Task6') {
+buildPipelineView('Build-Task6') {
     title('Task6-build')
-    displayedBuilds(3)
+    displayedBuilds(4)
     selectedJob('website_code_pull')
     showPipelineParameters(true)
     refreshFrequency(2)
