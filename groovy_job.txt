@@ -52,7 +52,7 @@ steps {
         shell('''#!/bin/bash -xe
 cp -rvf /root/.jenkins/workspace/job1/* .
 export html=$(kubectl get deployment | grep htmlwebsite | awk '{print$1}')
-if [[ "$html" == "htmlwebsite"]]
+if [[ "$html" == "htmlwebsite" ]]
 then 
 export status=$(curl -sL -w "%{http_code}" -I "http://192.168.99.100:30052" -o /dev/null)
 else
