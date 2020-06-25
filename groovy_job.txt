@@ -15,7 +15,8 @@ description ("Launching website on the top of k8s")
         upstream('website_code_pull', 'SUCCESS')
     }
    steps {
-        shell('''if ls | grep .html
+        shell('''#!/bin/bash -xe
+if ls | grep .html
 then 
 cd webcode 
 kubectl create -f htmlwebsite.yaml
@@ -48,8 +49,8 @@ description ("It will test if pod is running else send a mail")
         upstream('launching_website', 'SUCCESS')
     }
 steps {
-        shell('''cp -rvf /root/.jenkins/workspace/job1/* .
-
+        shell('''#!/bin/bash -xe
+cp -rvf /root/.jenkins/workspace/job1/* .
 export html=$(kubectl get deployment | grep htmlwebsite | awk '{print$1}')
 if [[ "$html" == "htmlwebsite"]]
 then 
