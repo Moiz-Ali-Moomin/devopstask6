@@ -26,7 +26,7 @@ cd ..
 export html=$(ls | grep .html)
 export htmlpod=$(kubectl get deployment | grep htmlwebsite | awk '{print$1}')
 sleep 4
-kubectl $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
+kubectl cp $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
  
 elif ls | grep .php
 then 
