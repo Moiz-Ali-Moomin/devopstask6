@@ -79,7 +79,7 @@ fi
 }
 
 
-buildPipelineView('BuildPipelin-Task6') {
+buildPipelineView('BuildPipelinE-Task6') {
     title('Task6-build')
     displayedBuilds(3)
     selectedJob('website_code_pull')
