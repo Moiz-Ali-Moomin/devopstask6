@@ -31,7 +31,7 @@ kubectl create -f html_deploy.yaml
 sleep 5
 cd .. 
 export html=$(ls | grep .html)
-export htmlpod=$(kubectl get deployment | grep htmlwebsite | awk '{print$1}')
+export htmlpod=$(kubectl get pods | grep htmlwebsite | awk '{print$1}')
 sleep 4
 kubectl cp $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
  
@@ -49,7 +49,7 @@ kubectl create -f php_deploy.yaml
 sleep 5
 cd .. 
 export php=$(ls | grep .php)
-export phpod=$(kubectl get deployment | grep phpwebsite | awk '{print$1}') 
+export phpod=$(kubectl get pods | grep phpwebsite | awk '{print$1}') 
 sleep 4
 kubectl cp $(echo $php) $(echo $phpod):/var/www/html/
 else 
