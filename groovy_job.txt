@@ -25,6 +25,7 @@ kubectl delete all --all
 kubectl delete pvc --all
 sleep 10 
 fi 
+kubectl delete pvc --all
 cd webcode 
 kubectl create -f html_deploy.yaml
 sleep 5
@@ -41,7 +42,8 @@ then
 kubectl delete all --all
 kubectl delete pvc --all
 sleep 10
-fi 
+fi
+kubectl delete pvc --all
 cd webcode 
 kubectl create -f php_deploy.yaml
 sleep 5
