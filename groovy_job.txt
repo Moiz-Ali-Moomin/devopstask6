@@ -18,7 +18,12 @@ description ("Launching website on the top of k8s")
         shell('''#!/bin/bash -xe
 cp -rvf /root/.jenkins/workspace/website_code_pull/* .
 if ls | grep .html
-then 
+then
+if kubectl get deployment | grep htmlwebsite
+then
+kubectl delete all --all
+sleep 10 
+fi 
 cd webcode 
 kubectl create -f html_deploy.yaml
 sleep 5
@@ -29,7 +34,12 @@ sleep 4
 kubectl cp $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
  
 elif ls | grep .php
-then 
+then
+if kubectl get deployment | grep phpwebsitewebsite
+then
+kubectl delete all --all
+sleep 10
+fi 
 cd webcode 
 kubectl create -f php_deploy.yaml
 sleep 5
@@ -37,7 +47,9 @@ cd ..
 export php=$(ls | grep .php)
 export phpod=$(kubectl get deployment | grep phpwebsite | awk '{print$1}') 
 sleep 4
-kubectl cp $(echo $php) $(echo $phpod):/var/www/html/ 
+kubectl cp $(echo $php) $(echo $phpod):/var/www/html/
+else 
+echo "Nothing found" 
 fi''')
     }
 }
