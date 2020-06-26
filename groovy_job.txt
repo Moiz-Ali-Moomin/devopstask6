@@ -19,9 +19,10 @@ description ("Launching website on the top of k8s")
 cp -rvf /root/.jenkins/workspace/website_code_pull/* .
 if ls | grep .html
 then
-if kubectl get deployment | grep htmlwebsite
+if kubectl get deployment | awk '{print $1}' | grep htmlwebsite
 then
 kubectl delete all --all
+kubectl delete pvc --all
 sleep 10 
 fi 
 cd webcode 
@@ -35,9 +36,10 @@ kubectl cp $(echo $html) $(echo $htmlpod):/usr/local/apache2/htdocs/
  
 elif ls | grep .php
 then
-if kubectl get deployment | grep phpwebsitewebsite
+if kubectl get deployment | awk '{print $1}' | grep phpwebsite 
 then
 kubectl delete all --all
+kubectl delete pvc --all
 sleep 10
 fi 
 cd webcode 
@@ -91,7 +93,7 @@ fi
 }
 
 
-buildPipelineView('BuildPipelines-Task6') {
+buildPipelineView('Buildpipelines-Task6') {
     title('Task6-build')
     displayedBuilds(3)
     selectedJob('website_code_pull')
